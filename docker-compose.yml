@@ -1,0 +1,58 @@
+name: er4_development
+services:
+  dev:
+    container_name: er4_dev
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: er4-dev
+      tags:
+        - er4-dev:latest
+      args:
+        - USERNAME=er4-user  # Changing username requires updating workspace mounts below
+        - USER_UID=${USER_UID:-1000}
+        - USER_GID=${USER_GID:-1000}
+        - ROS_DISTRO=${ROS2_DISTRO:-humble}
+    # Ensures signals are actually passed and reaped in the container for shutdowns
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#init
+    init: true
+    stdin_open: true
+    tty: true
+    privileged: true
+    network_mode: host
+    tmpfs: /tmp,/run,/run/lock
+    # Ensures the UR drivers have access to RT priority
+    ulimits:
+      rtprio: 99
+    environment:
+      # Pass the ROS_DOMAIN_ID from the host, if available, otherwise we default to 1 to avoid spamming networks
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-1}
+      # Enable running graphical applications from inside the container
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      # This service will attempt to mount and use the DDS configuration from the host, if it is defined.
+      # Otherwise, it will fall back to localhost only configuration using cyclonedds.
+      - RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION:-rmw_cyclonedds_cpp}
+      - CYCLONEDDS_URI=/cyclonedds.xml
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds.xml
+    volumes:
+      # If they are present, mount DDS configurations from the host machine into the container.
+      # If not, fallback to the default localhost configurations for both fastrtps and cyclonedds.
+      - ${CYCLONEDDS_URI:-./config/cyclonedds.xml}:/cyclonedds.xml:ro
+      - ${FASTRTPS_DEFAULT_PROFILES_FILE:-./config/fastdds.xml}:/fastdds.xml:ro
+      # If you build this locally with the correct user information then this shouldn't be an issue
+      # mounting without bindfs
+      - ./src:/opt/clr/src/:rw
+      # Bind mount folders into the container for preserving build artifacts
+      - ./build:/home/er4-user/ws/build/:rw
+      - ./install:/home/er4-user/ws/install/:rw
+      - ./log:/home/er4-user/ws/log/:rw
+      - ./.ccache:/home/er4-user/.ccache
+      # For rendering graphical commands inside the container
+      - x11_sock:/tmp/.X11-unix
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      # Uncomment to allow access to host hardware
+      # NOTE: This is quite dangerous so be careful with these containers
+      # - /dev:/dev
+    command: sleep infinity

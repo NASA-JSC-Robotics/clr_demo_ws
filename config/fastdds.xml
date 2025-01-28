@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profiles xmlns="http://www.eprosima.com">
+    <participant profile_name="ros2_profile" is_default_profile="true">
+        <rtps>
+            <name>ros2_profile</name>
+        </rtps>
+    </participant>
+</profiles>

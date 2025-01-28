@@ -1,0 +1,11 @@
+build:
+  symlink-install: true
+  mixin:
+    - rel-with-deb-info
+    - build-testing-on
+    - ccache
+    - compile-commands
+test:
+  event-handlers:
+    - console_direct+
+    - desktop_notification+
