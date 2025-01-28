@@ -43,7 +43,7 @@ services:
       - ${FASTRTPS_DEFAULT_PROFILES_FILE:-./config/fastdds.xml}:/fastdds.xml:ro
       # If you build this locally with the correct user information then this shouldn't be an issue
       # mounting without bindfs
-      - ./src:/opt/clr/src/:rw
+      - ./src:/home/er4-user/ws/src/:rw
       # Bind mount folders into the container for preserving build artifacts
       - ./build:/home/er4-user/ws/build/:rw
       - ./install:/home/er4-user/ws/install/:rw

@@ -13,7 +13,7 @@ ARG USER_GID=1000
 ARG USERNAME=er4-user
 
 # Define the install location for the developing application
-ENV ER4_WS="/home/er4/ws"
+ENV ER4_WS="/home/er4-user/ws"
 
 # DEBIAN_FRONTEND is set as an ARG instead of ENV variable so it doesn't persist in the image after build
 ARG DEBIAN_FRONTEND=noninteractive
