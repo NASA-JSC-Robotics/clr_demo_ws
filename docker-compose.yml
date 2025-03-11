@@ -1,4 +1,3 @@
-name: er4_development
 services:
   dev:
     env_file: .env
