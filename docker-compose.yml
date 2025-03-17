@@ -1,7 +1,5 @@
-name: er4_development
 services:
   dev:
-    container_name: er4_dev
     env_file: .env
     build:
       context: .
