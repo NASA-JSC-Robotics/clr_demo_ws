@@ -92,6 +92,14 @@ RUN colcon metadata add default  \
 
 COPY config/colcon-defaults.yaml /home/${USERNAME}/.colcon/defaults.yaml
 
+# Configure pyassimp, which has some unique problems on aarch machines.
+# To address this, we have adjusted the $LD_LIBRARY_PATH in the entrypoint to ensure
+# the required path is available to the python module to load the library.
+RUN pip3 install pyassimp==4.1.3
+
+# Install useful tooling
+RUN pip3 install ipython
+
 # Fix rosdep permissions and ensure sudo while we're at it
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -106,8 +114,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 # Source built dev image for automated testing.
 FROM er4-dev AS er4-dev-source
-
-ARG USERNAME
 
 RUN . /opt/ros/${ROS_DISTRO}/setup.bash && \
     colcon build
