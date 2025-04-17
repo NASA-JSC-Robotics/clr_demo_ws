@@ -27,6 +27,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     gdb \
     gdbserver \
     git \
+    less \
     python3-colcon-clean \
     python3-colcon-common-extensions \
     python3-colcon-mixin \
