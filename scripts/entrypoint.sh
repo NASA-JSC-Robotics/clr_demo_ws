@@ -3,6 +3,12 @@
 # For pip installed packages
 export PATH="${HOME}/.local/bin:${PATH}"
 
+# This change is required to support loading pyassimp on arm64 machines.
+if [ "$(uname -m)" = "aarch64" ]; then \
+    echo "Adding /usr/lib/aarch64-linux-gnu to linker's library path for arm64 support"
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/aarch64-linux-gnu; \
+fi
+
 # Source the ROS install
 # shellcheck source=/dev/null
 source "/opt/ros/${ROS_DISTRO}/setup.bash"
