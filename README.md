@@ -44,7 +44,7 @@ Alternatively, individual description and deploy submodules can be combined as n
 
 Then follow the instructions below to build and run the application.
 
-## Using the Images
+## Using the Development Image
 
 Build the base images using the compose specification.
 
@@ -52,7 +52,7 @@ To build the development image from the repo root, and then launch it
 
 ```bash
 # Compile the image
-docker compose build
+docker compose build dev
 
 # Start it
 docker compose up dev -d
@@ -77,13 +77,32 @@ To start those applications from inside the container,
 
 ```bash
 # In one terminal launch the simulated environment
-ros2 launch clr_deploy clr_sim.launch.py
+ros2 launch clr_deploy control.launch.py use_fake_hardware:=true
 
 # In another shell launch the moveit interface and move group nodes
 ros2 launch clr_moveit_config clr_moveit.launch.py
 ```
 
-### Other Things to Note
+## Using the Hardware Image
+
+The [compose file](docker-compose.yml) includes one additional runtime target, `hw`, for running on the physical robot.
+This service extends the `dev` service by adding necessary configuration for interacting with ChonkUR's hardware.
+It is built and run identically to the `dev` target,
+
+```bash
+# Compile the image
+docker compose build hw
+
+# Start it
+docker compose up hw -d
+
+# Connect to the console shell
+docker compose exec hw bash
+```
+
+Then use it in the same way as the development image, with the added hardware connections.
+
+## Other Things to Note
 
 - Build logs, compiled artifaces, and the `.ccache` are also mounted in the workspace/user home.
 This ensure artifacts are persisted even when restarting or recreating the container.
