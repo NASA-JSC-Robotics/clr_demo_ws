@@ -51,7 +51,15 @@ services:
       - x11_sock:/tmp/.X11-unix
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - $HOME/.Xauthority:/home/${HOST_USERNAME:-er4-user}/.Xauthority:rw
-      # Uncomment to allow access to host hardware
-      # NOTE: This is quite dangerous so be careful with these containers
-      # - /dev:/dev
     command: sleep infinity
+
+  # The hardware service includes any additional specifications for running on CLR hardware.
+  hw:
+    extends: dev
+    volumes:
+      # The controller machine requires access to some devices for hardware comms.
+      # Including, but not necessarily limited to the Hand-E gripper and Lift.
+      # TODO: Mount specific devices by name conventions, rather than all of /dev
+      - /dev:/dev
+    command: sleep infinity
+    profiles: [ hw ]
