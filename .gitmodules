@@ -30,14 +30,6 @@
 	path = src/vention_rail
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/vention_rail.git
 	branch = humble-devel
-[submodule "src/drt_ros2_ur_tools"]
-	path = src/drt_ros2_ur_tools
-	url = git@js-er-code.jsc.nasa.gov:imetro/drt_ros2_ur_tools.git
-	branch = humble-devel
-[submodule "src/drt_ros2_launch_common"]
-	path = src/drt_ros2_launch_common
-	url = git@js-er-code.jsc.nasa.gov:imetro/drt_ros2_launch_common.git
-	branch = humble-devel
 [submodule "src/trac_ik"]
 	path = src/trac_ik
 	url = https://bitbucket.org/traclabs/trac_ik.git
