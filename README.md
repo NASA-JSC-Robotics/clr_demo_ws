@@ -77,7 +77,7 @@ To start those applications from inside the container,
 
 ```bash
 # In one terminal launch the simulated environment
-ros2 launch clr_deploy control.launch.py use_fake_hardware:=true
+ros2 launch clr_deploy clr_sim.launch.py
 
 # In another shell launch the moveit interface and move group nodes
 ros2 launch clr_moveit_config clr_moveit.launch.py
