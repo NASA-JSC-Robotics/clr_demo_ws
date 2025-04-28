@@ -73,7 +73,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 
 # Add a non-root user with provided user details
 RUN groupadd -g ${USER_GID} ${USERNAME} \
-    && useradd -l -u ${USER_UID} -g ${USER_GID} --create-home -m -s /bin/bash -G sudo,adm,dialout,dip,plugdev ${USERNAME} \
+    && useradd -l -u ${USER_UID} -g ${USER_GID} --create-home -m -s /bin/bash -G sudo,adm,dialout,dip,plugdev,video ${USERNAME} \
     && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     mkdir -p \
         /home/${USERNAME}/.ccache \
