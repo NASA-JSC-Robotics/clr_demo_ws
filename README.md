@@ -101,6 +101,15 @@ docker compose exec hw bash
 ```
 
 Then use it in the same way as the development image, with the added hardware connections.
+When running ChonkUR or all of CLR, launching the hardware is a two step process to ensure that the UR pendant is running fully remotely:
+
+```bash
+# Start the dashboard client and other UR tools prior to launching the ROS 2 HW drivers
+ros2 launch chonkur_deploy ur_tools.launch.py
+
+# Then start the relevant hardware interface
+ros2 launch clr_deploy clr_hw.launch.py
+```
 
 ## Other Things to Note
 
