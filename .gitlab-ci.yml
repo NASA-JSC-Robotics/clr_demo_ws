@@ -55,6 +55,8 @@ set-tag:
 # Build the source image and push to the GitLab registry
 build_dev_source:
   stage: build
+  dependencies:
+    - set-tag
   image:
     name: js-er-code.jsc.nasa.gov:5005/ci_build/docker_with_nasa_certs:latest
   before_script:
@@ -80,6 +82,7 @@ run_tests:
   image:
     name: ${CI_REGISTRY_IMAGE}/${CONTAINER_TAG}
   dependencies:
+    - set-tag
     - build_dev_source
   variables:
     GIT_STRATEGY: none
