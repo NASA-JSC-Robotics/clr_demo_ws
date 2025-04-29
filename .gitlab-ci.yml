@@ -66,7 +66,7 @@ build_dev_source:
     - DOCKER_BUILDKIT=1 docker build
             --pull
             --cache-from ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
-            --cache-from ${CI_REGISTRY_IMAGE}/humble-devel
+            --cache-from ${CI_REGISTRY_IMAGE}:humble-devel
             -t ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
             --target er4-dev-source
             --file Dockerfile
