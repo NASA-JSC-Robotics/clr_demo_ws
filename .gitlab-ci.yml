@@ -43,11 +43,10 @@ set-tag:
   stage: setup
   script:
     - if [ -n "${CI_COMMIT_TAG}" ]; then
-        echo "CONTAINER_TAG=${CI_COMMIT_TAG}" > build.env;
+        echo "CONTAINER_TAG=${CI_COMMIT_TAG}" | tee -a build.env;
       else
-        echo "CONTAINER_TAG=${CI_COMMIT_REF_SLUG}" > build.env;
+        echo "CONTAINER_TAG=${CI_COMMIT_REF_SLUG}" | tee -a build.env;
       fi
-    - echo "CONTAINER_TAG=${CONTAINER_TAG}"
   artifacts:
     reports:
       dotenv: build.env
