@@ -80,7 +80,7 @@ run_tests:
   stage: test
   # TODO: How can we avoid pulling this
   image:
-    name: ${CI_REGISTRY_IMAGE}/${CONTAINER_TAG}
+    name: ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
   dependencies:
     - set-tag
     - build_dev_source
