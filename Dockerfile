@@ -103,6 +103,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 # Setup entrypoint
 COPY scripts/entrypoint.sh /entrypoint.sh
 RUN echo "source /entrypoint.sh" >> ~/.bashrc
+RUN echo "PS1=\"${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\](docker):\[\033[01;34m\]\w\[\033[00m\]\$ \"" >> ~/.bashrc
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Source built dev image for automated testing.
