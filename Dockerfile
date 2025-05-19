@@ -40,9 +40,18 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     xterm \
     wget
 
+# Add a non-root user with provided user details
+RUN groupadd -g ${USER_GID} ${USERNAME} \
+&& useradd -l -u ${USER_UID} -g ${USER_GID} --create-home -m -s /bin/bash -G sudo,adm,dialout,dip,plugdev ${USERNAME} \
+&& echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+mkdir -p \
+    /home/${USERNAME}/.ccache \
+    /home/${USERNAME}/.colcon \
+    /home/${USERNAME}/.ros \
+    ${ER4_WS}
+
 # Setup the install directory and clone the workspace to it
 # We put the install into the `${CLR_WS}` directory in typical ROS fashion
-RUN mkdir -p ${ER4_WS}
 WORKDIR  ${ER4_WS}
 RUN mkdir src build install log
 
@@ -70,15 +79,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
     ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
-# Add a non-root user with provided user details
-RUN groupadd -g ${USER_GID} ${USERNAME} \
-    && useradd -l -u ${USER_UID} -g ${USER_GID} --create-home -m -s /bin/bash -G sudo,adm,dialout,dip,plugdev ${USERNAME} \
-    && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    mkdir -p \
-        /home/${USERNAME}/.ccache \
-        /home/${USERNAME}/.colcon \
-        /home/${USERNAME}/.ros && \
-    chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
+RUN chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
 
 USER ${USERNAME}
 
@@ -102,6 +103,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 # Setup entrypoint
 COPY scripts/entrypoint.sh /entrypoint.sh
 RUN echo "source /entrypoint.sh" >> ~/.bashrc
+RUN echo "PS1=\"${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\](docker):\[\033[01;34m\]\w\[\033[00m\]\$ \"" >> ~/.bashrc
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Source built dev image for automated testing.
