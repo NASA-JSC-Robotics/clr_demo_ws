@@ -1,7 +1,3 @@
-[submodule "src/chonkur"]
-	path = src/chonkur
-	url = git@js-er-code.jsc.nasa.gov:imetro/robots/chonkur/chonkur.git
-	branch = humble-devel
 [submodule "src/chonkur_l_raile"]
 	path = src/chonkur_l_raile
 	url = git@js-er-code.jsc.nasa.gov:imetro/robots/chonkur-l-rail-e/chonkur_l_raile.git
@@ -9,10 +5,6 @@
 [submodule "src/dextivr_hande"]
 	path = src/dextivr_hande
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/robotiq/ros2/dextivr_hande.git
-	branch = humble-devel
-[submodule "src/drt_ros2_control_tools"]
-	path = src/drt_ros2_control_tools
-	url = git@js-er-code.jsc.nasa.gov:imetro/drt_ros2_control_tools.git
 	branch = humble-devel
 [submodule "src/ewellix_lift_kit"]
 	path = src/ewellix_lift_kit
