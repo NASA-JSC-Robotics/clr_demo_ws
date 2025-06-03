@@ -3,26 +3,26 @@
 	url = git@js-er-code.jsc.nasa.gov:imetro/robots/chonkur-l-rail-e/chonkur_l_raile.git
 	branch = humble-devel
 [submodule "src/dextivr_hande"]
-	path = src/dextivr_hande
+	path = src/external/dextivr_hande
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/robotiq/ros2/dextivr_hande.git
 	branch = humble-devel
 [submodule "src/ewellix_lift_kit"]
-	path = src/ewellix_lift_kit
+	path = src/external/ewellix_lift_kit
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/ewellix_lift_kit.git
 	branch = humble-devel
 [submodule "src/ros2_robotiq_gripper"]
-	path = src/ros2_robotiq_gripper
+	path = src/external/ros2_robotiq_gripper
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/robotiq/ros2/fm/ros2_robotiq_gripper.git
 	branch = humble-devel
 [submodule "src/serial"]
-	path = src/serial
+	path = src/external/serial
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/robotiq/ros2/fm/serial.git
 	branch = humble
 [submodule "src/vention_rail"]
-	path = src/vention_rail
+	path = src/external/vention_rail
 	url = git@js-er-code.jsc.nasa.gov:hw-toolbox/vention_rail.git
 	branch = humble-devel
 [submodule "src/trac_ik"]
-	path = src/trac_ik
+	path = src/external/trac_ik
 	url = https://bitbucket.org/traclabs/trac_ik.git
 	branch = 2.0.1
