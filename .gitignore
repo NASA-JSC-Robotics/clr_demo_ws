@@ -3,5 +3,8 @@ build/*
 install/*
 log/*
 
+# bash history
+.bash/*
+
 # VS code content
 .vscode/
