@@ -12,7 +12,7 @@ The mock-ups here can be used by anyone to develop or test robot applications fo
 
 This workspace bundles all required git submodules into a Docker containerized workflow that is identical to that which we run on hardware.
 While not required, we recommend using our Dockerfiles for consistent environment setup.
-Alternatively, individual description and deploy submodules can be combined as needed to meet user's requirements.
+Alternatively, individual packages and submodules can be added or extracted from the `src` directory as needed by the user.
 
 ## Quick Development Setup
 
