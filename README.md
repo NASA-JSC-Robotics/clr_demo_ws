@@ -12,7 +12,7 @@ The mock-ups here can be used by anyone to develop or test robot applications fo
 
 This workspace bundles all required git submodules into a Docker containerized workflow that is identical to that which we run on hardware.
 While not required, we recommend using our Dockerfiles for consistent environment setup.
-Alternatively, individual description and deploy submodules can be combined as needed to meet user's requirements.
+Alternatively, individual packages and submodules can be added or extracted from the `src` directory as needed by the user.
 
 ## Quick Development Setup
 
@@ -115,6 +115,9 @@ ros2 launch clr_deploy clr_hw.launch.py
 
 - Build logs, compiled artifaces, and the `.ccache` are also mounted in the workspace/user home.
 This ensure artifacts are persisted even when restarting or recreating the container.
+
+- The `.bash` folder gets mounted into your workspace, and the environment variable `HISTFILE` is set in the docker compose file.
+This points the bash to keep the history in this folder, which will persist between docker container sessions so that your history is kept.
 
 - Your host's DDS configuration (either cyclone or fastrtps) will be mounted into the image if set in your environment.
 For more information refer to the [compose specification](docker-compose.yaml).
