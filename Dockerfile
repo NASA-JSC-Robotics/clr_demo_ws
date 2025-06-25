@@ -77,10 +77,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
     ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
-RUN chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
-
-USER ${USERNAME}
-
 # Setup colcon default mixins and add default settings
 RUN colcon mixin add default \
     https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml && \
@@ -90,6 +86,11 @@ RUN colcon metadata add default  \
     colcon metadata update || true
 
 COPY config/colcon-defaults.yaml /home/${USERNAME}/.colcon/defaults.yaml
+COPY config/terminator_config /home/${USERNAME}/.config/terminator/config
+
+RUN chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
+
+USER ${USERNAME}
 
 # Fix rosdep permissions and ensure sudo while we're at it
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
