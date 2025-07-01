@@ -77,9 +77,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
     ros-${ROS_DISTRO}-rmw-fastrtps-cpp
 
-COPY config/colcon-defaults.yaml /home/${USERNAME}/.colcon/defaults.yaml
-COPY config/terminator_config /home/${USERNAME}/.config/terminator/config
-
 RUN chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
 
 USER ${USERNAME}
@@ -98,6 +95,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     sudo apt update && \
     . /opt/ros/${ROS_DISTRO}/setup.bash && \
     rosdep update --rosdistro ${ROS_DISTRO}
+
+# copy in configs for different features
+COPY --chown=${USERNAME}:${USERNAME} config/colcon-defaults.yaml /home/${USERNAME}/.colcon/defaults.yaml
+COPY --chown=${USERNAME}:${USERNAME} config/terminator_config /home/${USERNAME}/.config/terminator/config
 
 # Setup entrypoint and ensure it's added to ~/.bashrc
 COPY scripts/entrypoint.sh /entrypoint.sh
