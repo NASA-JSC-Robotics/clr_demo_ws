@@ -26,3 +26,15 @@
 	path = src/external/trac_ik
 	url = https://bitbucket.org/traclabs/trac_ik.git
 	branch = 2.0.1
+[submodule "src/external/clr_imetro_environments"]
+	path = src/external/clr_imetro_environments
+	url = git@js-er-code.jsc.nasa.gov:imetro/robots/chonkur-l-rail-e/clr_imetro_environments.git
+	branch = humble-devel
+[submodule "src/external/surface_robotics_mockups_description"]
+	path = src/external/surface_robotics_mockups_description
+	url = git@js-er-code.jsc.nasa.gov:imetro/mockup_descriptions/surface_robotics_mockups_description.git
+	branch = humble-devel
+[submodule "src/external/merlin_mockup_description"]
+	path = src/external/merlin_mockup_description
+	url = git@js-er-code.jsc.nasa.gov:imetro/mockup_descriptions/merlin/merlin_mockup_description.git
+	branch = humble-devel
