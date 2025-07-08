@@ -92,11 +92,13 @@ run_tests:
       docker run --rm \
         ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG} \
         bash -c "
-          # Execute from the user workspace
-          - pushd ${ER4_WS} > /dev/null
+          # Execute from the user workspace.
+          pushd ${ER4_WS} > /dev/null
+          # Run tests, modify as needed.
+          colcon test
           # Gives you easy to read summary in CI build, returns 1 in case of failures so this should
           # fail the CI job if there are issues.
-          - colcon test-result --verbose
+          colcon test-result --verbose
         "
   after_script:
     # Always clean up after ourselves
