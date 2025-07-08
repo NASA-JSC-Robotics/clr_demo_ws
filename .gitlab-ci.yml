@@ -68,6 +68,7 @@ build_dev_source:
             --cache-from ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
             --cache-from ${CI_REGISTRY_IMAGE}:humble-devel
             -t ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
+            --load
             --target er4-dev-source
             --file Dockerfile
             .
@@ -77,20 +78,28 @@ build_dev_source:
 
 run_tests:
   stage: test
-  # TODO: How can we avoid pulling this
   image:
-    name: ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG}
+    name: js-er-code.jsc.nasa.gov:5005/ci_build/docker_with_nasa_certs:latest
   dependencies:
     - set-tag
     - build_dev_source
-  variables:
-    GIT_STRATEGY: none
+  before_script:
+    - docker info
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
   script:
-    # Execute from the user workspace
-    - pushd ${ER4_WS} > /dev/null
-    # Skip ros2_robotiq_gripper/robotiq_controllers and ros2_robotiq_gripper/robotiq_driver
-    # they fail their ros2 formatting and linting tests and we're not ready to deal with that
-    - colcon test --packages-skip robotiq_controllers robotiq_driver
-    # Gives you easy to read summary in CI build, returns 1 in case of failures so this should
-    # fail the CI job if there are issues.
-    - colcon test-result --verbose
+    # TODO: Fix tests for broken packages
+    - |
+      docker run --rm \
+        ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG} \
+        bash -c "
+          # Execute from the user workspace
+          - pushd ${ER4_WS} > /dev/null
+          # Gives you easy to read summary in CI build, returns 1 in case of failures so this should
+          # fail the CI job if there are issues.
+          - colcon test-result --verbose
+        "
+  after_script:
+    # Always clean up after ourselves
+    - docker image rm --force ${CI_REGISTRY_IMAGE}:${CONTAINER_TAG} || true
+  tags:
+    - dind
