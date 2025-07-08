@@ -18,6 +18,18 @@ Uncomment the lines noted in the [docker-compose](../docker-compose.yml) file:
     #           count: all
 ```
 
+If when you try this, you get the following error,
+```sh
+docker: Error response from daemon: unknown or invalid runtime name: nvidia
+```
+run these commands to configure docker to use nvidia (make sure you have nvidia container toolkit installed):
+```sh
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+sudo nvidia-ctk runtime configure --runtime=containerd
+sudo systemctl restart containerd
+```
+
 ## Build Changes Not Visible
 
 Changing the workflow or workspace then running `docker compose build` will recreate the image.
