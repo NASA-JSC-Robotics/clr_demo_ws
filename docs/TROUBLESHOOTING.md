@@ -18,12 +18,17 @@ Uncomment the lines noted in the [docker-compose](../docker-compose.yml) file:
     #           count: all
 ```
 
-If when you try this, you get the following error,
-```sh
+When starting the container, you may see the following error:
+
+```bash
 docker: Error response from daemon: unknown or invalid runtime name: nvidia
 ```
-run these commands to configure docker to use nvidia (make sure you have nvidia container toolkit installed):
-```sh
+
+On your host, you must be sure to have the [nvidia container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) installed.
+The following commands can then be used to configure docker to use nvidia:
+
+```bash
+# Refer to the setup documents to be sure these are correct.
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 sudo nvidia-ctk runtime configure --runtime=containerd
