@@ -123,3 +123,7 @@ This points the bash to keep the history in this folder, which will persist betw
 For more information refer to the [compose specification](docker-compose.yaml).
 
 - Defaults for `colcon build` are set for the user. To change or modify, refer to the [defaults file](config/colcon-defaults.yaml).
+
+## Troubleshooting
+
+Common pitfalls and troubleshooting tips are documented in the [troubleshooting guide](./docs/TROUBLESHOOTING.md).
