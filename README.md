@@ -1,6 +1,6 @@
 # Sample Containerized Workspace
 
-This empty workspace can be used a starting point for a Docker-enabled VCS or Git Submodules workspace.
+This empty workspace can be used a starting point for a Docker-enabled workspace using Git submodules.
 The contents of the `src` directory should be treated similarly to a "normal" ROS workspace.
 That is, source code can be imported and added as needed to `src/`, then be built and run inside of an isolated, ROS enabled environment.
 
@@ -57,6 +57,9 @@ This points the bash to keep the history in this folder, which will persist betw
 For more information refer to the [compose specification](docker-compose.yaml).
 
 - Defaults for `colcon build` are set for the user. To change or modify, refer to the [defaults file](config/colcon-defaults.yaml).
+
+- We use [MuJoCo](https://mujoco.readthedocs.io/en/stable/XMLreference.html) for many of our dynamic simulations, and install the packages in this workspace.
+For `aarch64` users, you will need to set the `CPU_ARCH=aarch64` variable in your environment to ensure the correct version is installed.
 
 ## Troubleshooting
 
