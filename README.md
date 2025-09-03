@@ -83,6 +83,19 @@ ros2 launch clr_deploy clr_sim.launch.py
 ros2 launch clr_moveit_config clr_moveit.launch.py
 ```
 
+Additionally, a dynamic simulation of the CLR and mockups environment built with MuJoCo is available.
+To run,
+
+```bash
+# Start the mujoco ros2 control-based simulation
+ros2 launch clr_mujoco_config clr_mujoco.launch.py
+
+# In another shell launch the moveit interface with sim parameters set
+ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
+```
+
+More information about the dynamic simulation is available in the [project](https://github.com/NASA-JSC-Robotics/chonkur_l_raile) and [drivers](https://github.com/NASA-JSC-Robotics/mujoco_ros2_simulation) packages.
+
 ## Using the Hardware Image
 
 The [compose file](docker-compose.yml) includes one additional runtime target, `hw`, for running on the physical robot.
@@ -124,8 +137,7 @@ For more information refer to the [compose specification](docker-compose.yaml).
 
 - Defaults for `colcon build` are set for the user. To change or modify, refer to the [defaults file](config/colcon-defaults.yaml).
 
-- We use [MuJoCo](https://mujoco.readthedocs.io/en/stable/XMLreference.html) for many of our dynamic simulations, and install the packages in this workspace.
-For `aarch64` users, you will need to set the `CPU_ARCH=aarch64` variable in your environment to ensure the correct version is installed.
+- We use [MuJoCo](https://mujoco.readthedocs.io/en/stable/XMLreference.html) for many of our dynamic simulations, so we include installing in the [Dockerfile](./Dockerfile).
 
 ## Troubleshooting
 
