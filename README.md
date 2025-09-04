@@ -1,8 +1,11 @@
-# CLR Dynamic Sim Demonstration Workspace
+# CLR Demonstration Workspace
 
-This is a fork of the base [CLR repo](https://github.com/NASA-JSC-Robotics/clr_ws).
-In addition to the base packages, it includes multiple submodules for running demonstrations in the CLR MuJoCo simulation.
-For more information, refer to the documentation in [clr_sim_demos](https://github.com/NASA-JSC-Robotics/clr_sim_demos).
+> [!NOTE]
+> This is a fork of the base [CLR repo](https://github.com/NASA-JSC-Robotics/clr_ws).
+> In addition to the base packages, it adds multiple submodules for running demonstrations with the CLR system, both on hardware an with the dynamic MuJoCo simulation.
+> For more information, refer to the documentation in [clr_sim_demos](https://github.com/NASA-JSC-Robotics/clr_sim_demos).
+>
+> Users wishing to expand on the base CLR capabilities can use this workspace as a guide on how to fork and build on the base project.
 
 This workspace includes open source resources for using the ChonkUR L Rail-E robot system,
 part of the [iMETRO Facility](https://ntrs.nasa.gov/citations/20240013956) at NASA's Johnson Space Center.
@@ -28,10 +31,10 @@ NASA internal users should refer to confluence for how to setup authentication t
 
     ```bash
     # Clone with submodules
-    git clone --recursive https://github.com/NASA-JSC-Robotics/clr_dynamic_sim_demo.git
+    git clone --recursive https://github.com/NASA-JSC-Robotics/clr_demo_ws.git
 
     # Or initialize them from the repo's root
-    cd clr_ws
+    cd clr_demo_ws
     git submodule update --init
     ```
 
@@ -129,7 +132,7 @@ ros2 launch chonkur_deploy ur_tools.launch.py
 ros2 launch clr_deploy clr_hw.launch.py
 ```
 
-## Other Things to Note
+## Important Notes
 
 - Build logs, compiled artifaces, and the `.ccache` are also mounted in the workspace/user home.
 This ensure artifacts are persisted even when restarting or recreating the container.
@@ -143,6 +146,9 @@ For more information refer to the [compose specification](docker-compose.yaml).
 - Defaults for `colcon build` are set for the user. To change or modify, refer to the [defaults file](config/colcon-defaults.yaml).
 
 - We use [MuJoCo](https://mujoco.readthedocs.io/en/stable/XMLreference.html) for many of our dynamic simulations, so we include installing in the [Dockerfile](./Dockerfile).
+
+- If you have an NVIDIA or other graphics card, you will have to complete additional configuration steps to use the docker container.
+Please refer to the [troubleshooting guide](./docs/TROUBLESHOOTING.md#slow-rendering) for more information.
 
 ## Troubleshooting
 
