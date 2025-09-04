@@ -1,4 +1,8 @@
-# ChonkUR L Rail-E Workspace
+# CLR Dynamic Sim Demonstration Workspace
+
+This is a fork of the base [CLR repo](https://github.com/NASA-JSC-Robotics/clr_ws).
+In addition to the base packages, it includes multiple submodules for running demonstrations in the CLR MuJoCo simulation.
+For more information, refer to the documentation in [clr_sim_demos](https://github.com/NASA-JSC-Robotics/clr_sim_demos).
 
 This workspace includes open source resources for using the ChonkUR L Rail-E robot system,
 part of the [iMETRO Facility](https://ntrs.nasa.gov/citations/20240013956) at NASA's Johnson Space Center.
@@ -24,7 +28,7 @@ NASA internal users should refer to confluence for how to setup authentication t
 
     ```bash
     # Clone with submodules
-    git clone --recursive https://github.com/NASA-JSC-Robotics/clr_ws.git
+    git clone --recursive https://github.com/NASA-JSC-Robotics/clr_dynamic_sim_demo.git
 
     # Or initialize them from the repo's root
     cd clr_ws
